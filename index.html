@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naseem Sultana — Cloud Support · DevOps · SRE</title>
+  <meta name="description" content="Naseem Sultana — seven years of enterprise application support, MSc Cloud Computing, moving into Cloud Support, DevOps and SRE roles in Ireland.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fafaf9;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #55607a;
+      --faint: #8a93a8;
+      --accent: #0f766e;
+      --accent-soft: #e6f3f1;
+      --border: #e7e5e4;
+      --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+      --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0f14;
+        --surface: #121821;
+        --text: #e8ecf2;
+        --muted: #a3adbf;
+        --faint: #6f7a8e;
+        --accent: #2dd4bf;
+        --accent-soft: #0f2a28;
+        --border: #222a36;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+    .label {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 12px;
+    }
+    svg.icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ---------- Navigation ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-weight: 700; text-decoration: none; letter-spacing: -0.01em; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.92rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 88px 0 72px;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.85rem; font-weight: 500; color: var(--muted);
+      border: 1px solid var(--border); background: var(--surface);
+      padding: 6px 14px; border-radius: 999px; margin-bottom: 24px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2); }
+    .hero h1 {
+      font-size: clamp(2.3rem, 5vw, 3.4rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin: 0 0 16px;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .lede { font-size: 1.1rem; color: var(--muted); max-width: 540px; margin: 0 0 32px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 10px;
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--text); color: var(--bg); }
+    .btn-ghost { border: 1px solid var(--border); background: var(--surface); }
+
+    /* Terminal card */
+    .terminal {
+      background: #0f172a;
+      color: #cbd5e1;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      overflow: hidden;
+      border: 1px solid #1e293b;
+    }
+    .terminal-bar { display: flex; gap: 6px; padding: 12px 14px; background: #111c33; }
+    .terminal-bar i { width: 10px; height: 10px; border-radius: 50%; background: #334155; display: block; }
+    .terminal-body { padding: 18px 20px 22px; line-height: 1.8; }
+    .terminal .p { color: #2dd4bf; }
+    .terminal .k { color: #94a3b8; }
+    .terminal .v { color: #f1f5f9; }
+
+    /* ---------- Sections ---------- */
+    section { padding: 80px 0; border-top: 1px solid var(--border); }
+    .section-head { max-width: 640px; margin-bottom: 40px; }
+    .section-head h2 { font-size: 2rem; letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 12px; }
+    .section-head p { color: var(--muted); margin: 0; }
+
+    /* Metrics */
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .metric { background: var(--surface); padding: 28px 24px; }
+    .metric strong { display: block; font-size: 2.1rem; letter-spacing: -0.02em; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 0.9rem; }
+
+    /* Projects */
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .project {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .project:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+    .project-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .num { font-family: var(--mono); color: var(--faint); font-size: 0.85rem; }
+    .badge { font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+    .badge.live { background: rgba(34, 197, 94, 0.12); color: #16a34a; }
+    .badge.wip { background: rgba(245, 158, 11, 0.14); color: #d97706; }
+    .badge.done { background: var(--accent-soft); color: var(--accent); }
+    .project h3 { font-size: 1.25rem; margin: 0 0 4px; letter-spacing: -0.01em; }
+    .project .context { font-size: 0.85rem; color: var(--faint); margin: 0 0 14px; }
+    .project p { color: var(--muted); margin: 0 0 20px; flex-grow: 1; }
+    .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+    .stack span {
+      font-family: var(--mono); font-size: 0.75rem;
+      border: 1px solid var(--border); padding: 3px 10px; border-radius: 6px; color: var(--muted);
+    }
+    .project-links { display: flex; gap: 20px; }
+    .project-links a {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.9rem; font-weight: 600; text-decoration: none; color: var(--accent);
+    }
+
+    /* Experience timeline */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before { content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+    .role { position: relative; padding-bottom: 36px; }
+    .role:last-child { padding-bottom: 0; }
+    .role::before {
+      content: ""; position: absolute; left: -28px; top: 7px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--accent);
+    }
+    .role-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; }
+    .role h3 { margin: 0; font-size: 1.1rem; }
+    .role .when { font-family: var(--mono); font-size: 0.82rem; color: var(--faint); }
+    .role .org { color: var(--muted); margin: 2px 0 10px; font-size: 0.95rem; }
+    .role ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .role li { margin-bottom: 4px; }
+
+    /* Skills */
+    .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+    .skill-group h3 { font-size: 1rem; margin: 0 0 14px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pills span { background: var(--accent-soft); color: var(--accent); font-size: 0.82rem; font-weight: 500; padding: 5px 12px; border-radius: 999px; }
+
+    /* Education */
+    .edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .edu-item { border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; }
+    .edu-item h3 { margin: 0 0 4px; font-size: 1.05rem; }
+    .edu-item p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+    /* Contact */
+    .contact {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+      padding: 56px 40px; text-align: center; box-shadow: var(--shadow);
+    }
+    .contact h2 { font-size: 2rem; letter-spacing: -0.02em; margin: 0 0 12px; }
+    .contact p { color: var(--muted); max-width: 520px; margin: 0 auto 28px; }
+    .contact .actions { justify-content: center; }
+
+    footer { padding: 36px 0 48px; color: var(--faint); font-size: 0.88rem; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding: 56px 0 48px; gap: 36px; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .projects, .skills, .edu { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 16px; }
+      .nav-links { display: none; }
+      section { padding: 56px 0; }
+      .contact { padding: 40px 20px; }
+      .metric strong { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a class="brand" href="#top">Naseem Sultana<span>.</span></a>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap" id="top">
+
+    <!-- ================= HERO ================= -->
+    <header class="hero">
+      <div>
+        <div class="status-pill"><span class="dot"></span> Available now · Dublin, Ireland</div>
+        <p class="label">Cloud Support · DevOps · SRE</p>
+        <h1>I keep production systems <em>running</em> — and now I automate them.</h1>
+        <p class="lede">
+          Seven years resolving critical incidents for global enterprises at SAP Cloud, Amazon and Verizon.
+          MSc in Cloud Computing. Building hands-on cloud, CI/CD and automation projects.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#projects">View projects</a>
+          <a class="btn btn-ghost" href="https://naseem-ie.github.io/Cloud-CV/">
+            Read my CV
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="terminal" aria-label="Profile summary">
+        <div class="terminal-bar"><i></i><i></i><i></i></div>
+        <div class="terminal-body">
+          <div><span class="p">$</span> whoami</div>
+          <div class="v">naseem-sultana</div>
+          <div style="margin-top:10px"><span class="p">$</span> cat profile.yaml</div>
+          <div><span class="k">role:</span> <span class="v">Application Support Specialist</span></div>
+          <div><span class="k">experience:</span> <span class="v">7+ years</span></div>
+          <div><span class="k">education:</span> <span class="v">MSc Cloud Computing</span></div>
+          <div><span class="k">sla_adherence:</span> <span class="v">98%</span></div>
+          <div><span class="k">next:</span> <span class="v">[cloud-support, devops, sre]</span></div>
+          <div style="margin-top:10px"><span class="p">$</span> <span class="v">_</span></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= IMPACT ================= -->
+    <section class="reveal">
+      <div class="section-head">
+        <p class="label">Impact</p>
+        <h2>Results from enterprise production support</h2>
+      </div>
+      <div class="metrics">
+        <div class="metric"><strong>98%</strong><span>SLA adherence across 30+ concurrent cases</span></div>
+        <div class="metric"><strong>0</strong><span>Tier 4 escalations as primary escalation point</span></div>
+        <div class="metric"><strong>25%</strong><span>Reduction in repeat incidents via root cause fixes</span></div>
+        <div class="metric"><strong>40%</strong><span>Faster team resolution through documentation</span></div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS =================
+         To add a project: copy one whole <article class="project"> block and edit it. -->
+    <section id="projects" class="reveal">
+      <div class="section-head">
+        <p class="label">Projects</p>
+        <h2>Selected work</h2>
+        <p>Hands-on cloud and DevOps projects, from MSc research to live deployments.</p>
+      </div>
+      <div class="projects">
+
+        <article class="project">
+          <div class="project-top"><span class="num">01</span><span class="badge live">Live</span></div>
+          <h3>Cloud CV</h3>
+          <p class="context">Personal project</p>
+          <p>CV published as a cloud-hosted website with version control and automated deployment on every push. Next: a serverless visitor counter.</p>
+          <div class="stack"><span>GitHub Pages</span><span>GitHub Actions</span><span>Git</span></div>
+          <div class="project-links">
+            <a href="https://naseem-ie.github.io/Cloud-CV/">Live site ↗</a>
+            <a href="https://github.com/naseem-ie/Cloud-CV">Source ↗</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top"><span class="num">02</span><span class="badge wip">In progress</span></div>
+          <h3>Cloud Quiz App</h3>
+          <p class="context">Team project · 2 engineers</p>
+          <p>Web app for AWS Cloud Practitioner exam prep, built collaboratively using feature branches, pull requests and peer code review.</p>
+          <div class="stack"><span>JavaScript</span><span>Git workflow</span><span>Code review</span></div>
+          <div class="project-links">
+            <!-- CHANGE: update once the repo exists -->
+            <a href="https://github.com/naseem-ie/cloud-quiz">Source ↗</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top"><span class="num">03</span><span class="badge done">Completed</span></div>
+          <h3>Employee Management System</h3>
+          <p class="context">MSc Cloud Computing · NCI Dublin</p>
+          <p>Full-stack application deployed on AWS Elastic Beanstalk with an automated CI/CD pipeline, CloudWatch monitoring, and automated security and code-quality gates.</p>
+          <div class="stack"><span>AWS</span><span>CodePipeline</span><span>CloudWatch</span><span>Django</span><span>Bandit</span></div>
+          <div class="project-links">
+            <!-- CHANGE: replace # with this project's GitHub link, or delete this line -->
+            <a href="#">Source ↗</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top"><span class="num">04</span><span class="badge done">Completed</span></div>
+          <h3>CloudSim Scheduling Research</h3>
+          <p class="context">MSc Cloud Computing · NCI Dublin</p>
+          <p>Metaheuristic scheduling algorithms to optimise cloud resource allocation, using Kubernetes to simulate scaling and analyse CPU, memory and QoS metrics.</p>
+          <div class="stack"><span>Kubernetes</span><span>Java</span><span>CloudSim</span></div>
+          <div class="project-links">
+            <!-- CHANGE: replace # with this project's GitHub link, or delete this line -->
+            <a href="#">Source ↗</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience" class="reveal">
+      <div class="section-head">
+        <p class="label">Experience</p>
+        <h2>Seven years in production support</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="role">
+          <div class="role-head"><h3>Application Support Specialist</h3><span class="when">2024 — 2026</span></div>
+          <p class="org">Manpower Group (SAP Client) · Dublin</p>
+          <ul>
+            <li>Primary escalation point for five global enterprise accounts on SAP Ariba, SuccessFactors and Concur.</li>
+            <li>Root cause analysis with SAML Tracer and platform diagnostics, cutting repeat incidents by 25%.</li>
+            <li>98% SLA adherence across 30+ concurrent cases with zero Tier 4 escalations.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="role-head"><h3>Senior Technical Associate</h3><span class="when">2020 — 2022</span></div>
+          <p class="org">Tech Mahindra (Verizon Client) · Hyderabad</p>
+          <ul>
+            <li>Second-line support for a high-volume enterprise telecoms environment.</li>
+            <li>Awarded Employee of the Year for technical delivery.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="role-head"><h3>D2AS Technical Associate</h3><span class="when">2016 — 2019</span></div>
+          <p class="org">Amazon Development Centre · Hyderabad</p>
+          <ul>
+            <li>Promoted to the specialist escalation team within 12 months, handling critical outages 24x7.</li>
+            <li>90% first-contact resolution rate.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills" class="reveal">
+      <div class="section-head">
+        <p class="label">Skills</p>
+        <h2>Toolkit</h2>
+      </div>
+      <div class="skills">
+        <div class="skill-group">
+          <h3>Cloud &amp; DevOps</h3>
+          <div class="pills"><span>AWS EC2</span><span>S3</span><span>Elastic Beanstalk</span><span>CloudWatch</span><span>CodePipeline</span><span>GitHub Actions</span><span>Git</span><span>Kubernetes</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Operations &amp; Incident Management</h3>
+          <div class="pills"><span>Root cause analysis</span><span>Escalation management</span><span>SLA management</span><span>ServiceNow</span><span>Jira</span><span>Knowledge management</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Identity &amp; Enterprise Platforms</h3>
+          <div class="pills"><span>SSO / SAML diagnostics</span><span>Access management</span><span>SAP Ariba</span><span>SuccessFactors</span><span>Concur</span></div>
+        </div>
+        <div class="skill-group">
+          <h3>Currently Learning</h3>
+          <div class="pills"><span>AWS Cloud Practitioner</span><span>Docker</span><span>Terraform</span><span>Linux</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EDUCATION ================= -->
+    <section class="reveal">
+      <div class="section-head">
+        <p class="label">Education</p>
+        <h2>Background</h2>
+      </div>
+      <div class="edu">
+        <div class="edu-item">
+          <h3>MSc Cloud Computing</h3>
+          <p>National College of Ireland, Dublin · 2024</p>
+          <p>Cloud Architectures · Cloud DevOpsSec · Scalable Cloud Programming</p>
+        </div>
+        <div class="edu-item">
+          <h3>BTech Computer Science &amp; Engineering</h3>
+          <p>JNTU Hyderabad · 2016</p>
+          <p>Computer Networks · Operating Systems · Network Security</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="reveal">
+      <div class="contact">
+        <p class="label">Contact</p>
+        <h2>Let's talk</h2>
+        <p>I'm open to Cloud Support, DevOps and SRE roles across Ireland. I'd be glad to hear from you.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:naseemsultana.er@gmail.com">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Email me
+          </a>
+          <a class="btn btn-ghost" href="https://linkedin.com/in/naseemsultana">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/naseem-ie">GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© <span id="year">2026</span> Naseem Sultana</span>
+      <span>Built with HTML &amp; CSS · Deployed on GitHub Pages</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const items = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      items.forEach((el) => io.observe(el));
+    } else {
+      items.forEach((el) => el.classList.add("visible"));
+    }
+  </script>
+</body>
+</html>
